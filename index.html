@@ -2,24 +2,20 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Your To Do List</title>
+    <title>To Do List</title>
     <link rel="stylesheet" href=style.css>
   </head>
-
-  <body>
-    <div class="container">
-      <h1 id="header"> Your To Do List </h1>
-
-        <form class="list-container">
-          <input id="item" type="text" placeholder="New" required/>
-          <button onclick="listToDo()" id="list-button"> Add to list </button>
-        </form>
-      <h2> Items</h2
-      <ul id="display">
-        <li id="text-output"></li>
-      </ul>
-      <button>Clear All</button>
-    </div>
+  <body id ="main-header">
+    <h2 class="title">To Do List</h2>
+    <form id="list-container">
+      <input type="text" id="item">
+      <input type="submit" value="submit">
+    </form>
+    <h2 class="title"></h2>
+    <ul id="items">
+      <!-- <li class="text-input"></li> -->
+    </ul>
     <script src="scripts.js"></script>
+
   </body>
 </html>
