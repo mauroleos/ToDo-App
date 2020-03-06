@@ -1,5 +1,4 @@
 const form = document.getElementById('list-container');
-const itemList = document.getElementById('items');
 form.addEventListener('submit', addItem);
 // form.addEventListener('click', removeItem);
 
@@ -20,7 +19,6 @@ function addItem(e){
   strikeLine.setAttribute('type', 'checkbox');
   strikeLine.setAttribute('id', 'checkboxLine')
 
-  itemList.appendChild(li);
 
   del.addEventListener('click',function(){
     const liDel = document.getElementById('items');
@@ -37,10 +35,13 @@ function addItem(e){
 
   itemsArray.push(newItem);
   localStorage.setItem('list', JSON.stringify(itemsArray));
+  const list = JSON.parse(localStorage.getItem('list') || itemsArray);
+
 
 }
 
-
+console.log('This ran when the page loaded');
+console.log(list)
 
 //** A user should be able to mark a TO-DO as completed
 //** When a user mark’s a TO-DO as completed the message of the TO-DO should be crossed out (using strikethrough font)
