@@ -30,7 +30,8 @@ function addItem(e){
     removeDelBtn.removeChild(del);
     const removeStrikeBtn=document.getElementById('items');
     removeStrikeBtn.removeChild(strikeLine);
-  });
+    localStorage.removeItem('list');
+  })
 
   document.getElementById('items').appendChild(li);
   document.getElementById('items').appendChild(del);
@@ -44,7 +45,6 @@ function addItem(e){
 //*** Displaying lis on website ***
 for (let i=0; i<list.length; i++){
   const displayItems = list[i];
-  console.log(displayItems)
 }
 
 const newItem=document.getElementById('item').value;
@@ -68,6 +68,7 @@ del.addEventListener('click',function(){
   removeDelBtn.removeChild(del);
   const removeStrikeBtn=document.getElementById('items');
   removeStrikeBtn.removeChild(strikeLine);
+  localStorage.removeItem('list');
 });
 
 document.getElementById('items').appendChild(li);
@@ -76,6 +77,6 @@ document.getElementById('items').appendChild(strikeLine)
 
 
 //*** Remvoing lis from website works succesfully but:
-  //*** 1. Variable stays in Array even after it's been removed from the Website
-  //*** 2. Reloading the page shows the delete button and the checkbox but not the li for only 1 item 
+  //*** 1. All variables are reomoved from Array when the delete button is clicked
+  //*** 2. Reloading the page shows the delete button and the checkbox but not the li for only 1 item
   //*** 3. To-Dos fail to crossed out when the checkbox is clicked
