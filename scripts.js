@@ -1,31 +1,34 @@
-const form = document.getElementById('list-container');
+const form=document.getElementById('list-container');
 form.addEventListener('submit', addItem);
-// form.addEventListener('click', removeItem);
 
-let itemsArray = [];
+let itemsArray =[];
+const list=JSON.parse(localStorage.getItem('list') || itemsArray);
 
+//*** Adding lis to Array ***
 function addItem(e){
   e.preventDefault();
-  const newItem = document.getElementById('item').value;
-  const li = document.createElement('li');
-  const textNode = document.createTextNode(newItem);
+  const newItem=document.getElementById('item').value;
+  const li=document.createElement('li');
+  const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
 
-  const del = document.createElement('button');
+//*** Adding delete button to Lis ***
+  const del=document.createElement('button');
   del.appendChild(document.createTextNode('X'));
   li.appendChild(del);
 
-  const strikeLine = document.createElement('input');
+//*** Adding strikeLine to lis ***
+  const strikeLine=document.createElement('input');
   strikeLine.setAttribute('type', 'checkbox');
   strikeLine.setAttribute('id', 'checkboxLine')
 
-
+//*** Removing lis and buttons from Array ***
   del.addEventListener('click',function(){
-    const liDel = document.getElementById('items');
+    const liDel=document.getElementById('items');
     liDel.removeChild(li);
-    const removeDelBtn = document.getElementById('items');
+    const removeDelBtn=document.getElementById('items');
     removeDelBtn.removeChild(del);
-    const removeStrikeBtn = document.getElementById('items');
+    const removeStrikeBtn=document.getElementById('items');
     removeStrikeBtn.removeChild(strikeLine);
   });
 
@@ -33,16 +36,46 @@ function addItem(e){
   document.getElementById('items').appendChild(del);
   document.getElementById('items').appendChild(strikeLine)
 
+//*** Pushing items to localStorage ***
   itemsArray.push(newItem);
   localStorage.setItem('list', JSON.stringify(itemsArray));
-  const list = JSON.parse(localStorage.getItem('list') || itemsArray);
-
-
 }
 
-console.log('This ran when the page loaded');
-console.log(list)
+//*** Displaying lis on website ***
+for (let i=0; i<list.length; i++){
+  const displayItems = list[i];
+  console.log(displayItems)
+}
 
-//** A user should be able to mark a TO-DO as completed
-//** When a user mark’s a TO-DO as completed the message of the TO-DO should be crossed out (using strikethrough font)
-//** A user should have the option of deleting TO-DO’s that have been mark completed
+const newItem=document.getElementById('item').value;
+const li=document.createElement('li');
+const textNode=document.createTextNode(newItem);
+li.appendChild(textNode);
+
+const del=document.createElement('button');
+del.appendChild(document.createTextNode('X'));
+li.appendChild(del);
+
+const strikeLine=document.createElement('input');
+strikeLine.setAttribute('type', 'checkbox');
+strikeLine.setAttribute('id', 'checkboxLine')
+
+
+del.addEventListener('click',function(){
+  const liDel=document.getElementById('items');
+  liDel.removeChild(li);
+  const removeDelBtn=document.getElementById('items');
+  removeDelBtn.removeChild(del);
+  const removeStrikeBtn=document.getElementById('items');
+  removeStrikeBtn.removeChild(strikeLine);
+});
+
+document.getElementById('items').appendChild(li);
+document.getElementById('items').appendChild(del);
+document.getElementById('items').appendChild(strikeLine)
+
+
+//*** Remvoing lis from website works succesfully but:
+  //*** 1. Variable stays in Array even after it's been removed from the Website
+  //*** 2. Reloading the page shows the delete button and the checkbox but not the li for only 1 item 
+  //*** 3. To-Dos fail to crossed out when the checkbox is clicked
