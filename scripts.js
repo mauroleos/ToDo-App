@@ -9,18 +9,22 @@ function addItem(e){
   e.preventDefault();
   const newItem=document.getElementById('item').value;
   const li=document.createElement('li');
+  li.setAttribute('id', 'listItems');
   const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
+
+  const strikeLine=document.createElement('input');
+  strikeLine.setAttribute('type', 'checkbox');
+  strikeLine.setAttribute('id', 'checkboxLine')
+  strikeLine.addEventListener('click',function(e){
+    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
+  });
+  li.appendChild(strikeLine);
 
 //*** Adding delete button to Lis ***
   const del=document.createElement('button');
   del.appendChild(document.createTextNode('X'));
   li.appendChild(del);
-
-//*** Adding strikeLine to lis ***
-  const strikeLine=document.createElement('input');
-  strikeLine.setAttribute('type', 'checkbox');
-  strikeLine.setAttribute('id', 'checkboxLine')
 
 //*** Removing lis and buttons from Array ***
   del.addEventListener('click',function(){
@@ -34,8 +38,8 @@ function addItem(e){
   })
 
   document.getElementById('items').appendChild(li);
-  document.getElementById('items').appendChild(del);
-  document.getElementById('items').appendChild(strikeLine)
+  // document.getElementById('items').appendChild(del);
+  // document.getElementById('items').appendChild(strikeLine)
 
 //*** Pushing items to localStorage ***
   itemsArray.push(newItem);
@@ -48,20 +52,25 @@ for (let i=0; i<savedItems.length; i++){
   const displayItems = savedItems[i];
   console.log(savedItems);
 
-  const newItem=document.getElementById('item').value;
+  const newItem=displayItems
   const li=document.createElement('li');
+  li.setAttribute('id', 'listItems');
   const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
+
+//*** Adding strikeLine to lis ***
+const strikeLine=document.createElement('input');
+strikeLine.setAttribute('type', 'checkbox');
+strikeLine.setAttribute('id', 'checkboxLine')
+strikeLine.addEventListener('click',function(e){
+  strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
+});
+li.appendChild(strikeLine);
 
 //*** Adding delete button to Lis ***
   const del=document.createElement('button');
   del.appendChild(document.createTextNode('X'));
   li.appendChild(del);
-
-//*** Adding strikeLine to lis ***
-  const strikeLine=document.createElement('input');
-  strikeLine.setAttribute('type', 'checkbox');
-  strikeLine.setAttribute('id', 'checkboxLine')
 
 //*** Removing lis and buttons from Array ***
   del.addEventListener('click',function(){
@@ -75,8 +84,8 @@ for (let i=0; i<savedItems.length; i++){
   })
 
   document.getElementById('items').appendChild(li);
-  document.getElementById('items').appendChild(del);
-  document.getElementById('items').appendChild(strikeLine)
+  // document.getElementById('items').appendChild(del);
+  // document.getElementById('items').appendChild(strikeLine)
 }
 
 
