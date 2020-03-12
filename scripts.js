@@ -4,7 +4,7 @@ form.addEventListener('submit', addItem);
 let itemsArray =[];
 const list=JSON.parse(localStorage.getItem('list') || itemsArray);
 
-//*** Adding lis to Array ***
+//*** Adding lis ***
 function addItem(e){
   e.preventDefault();
   const newItem=document.getElementById('item').value;
@@ -13,6 +13,7 @@ function addItem(e){
   const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
 
+//*** Adding Strikethrough line to Li ***
   const strikeLine=document.createElement('input');
   strikeLine.setAttribute('type', 'checkbox');
   strikeLine.setAttribute('id', 'checkboxLine')
@@ -26,31 +27,40 @@ function addItem(e){
   del.appendChild(document.createTextNode('X'));
   li.appendChild(del);
 
-//*** Removing lis and buttons from Array ***
-  del.addEventListener('click',function(){
+//*** Removing lis, delete buttons, amd strikethrough lines ***
+  del.addEventListener('click',function(e){
     const liDel=document.getElementById('items');
     liDel.removeChild(li);
-    const removeDelBtn=document.getElementById('items');
-    removeDelBtn.removeChild(del);
-    const removeStrikeBtn=document.getElementById('items');
-    removeStrikeBtn.removeChild(strikeLine);
-    localStorage.removeItem('list');
+    // const removeDelBtn=document.getElementById('items');
+    // removeDelBtn.removeChild(del);
+    // const removeStrikeBtn=document.getElementById('items');
+    // removeStrikeBtn.removeChild(strikeLine);
+
+    const arrayItems=JSON.parse(localStorage.getItem('list') || '[]');
+    const indexItem=list.indexOf();
+    console.log(indexItem);
+    localStorage.removeItem(indexItem);
+    localStorage.setItem('list', JSON.stringify(arrayItems));
   })
 
   document.getElementById('items').appendChild(li);
-  // document.getElementById('items').appendChild(del);
-  // document.getElementById('items').appendChild(strikeLine)
 
 //*** Pushing items to localStorage ***
   itemsArray.push(newItem);
   localStorage.setItem('list', JSON.stringify(itemsArray));
 }
 
-//*** Displaying lis on website ***
-const savedItems = JSON.parse(localStorage.getItem('list') || '[]');
+// const indexItem=list.indexOf('hi');
+// console.log(indexItem)
+// // localStorage.removeItem('list');
+
+let displayArrayItems = [];
+
+//*** Adding lis ***
+const savedItems = JSON.parse(localStorage.getItem('list') || displayArrayItems);
 for (let i=0; i<savedItems.length; i++){
   const displayItems = savedItems[i];
-  console.log(savedItems);
+  // console.log(savedItems);
 
   const newItem=displayItems
   const li=document.createElement('li');
@@ -58,7 +68,7 @@ for (let i=0; i<savedItems.length; i++){
   const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
 
-//*** Adding strikeLine to lis ***
+//*** Adding strikethrough line to lis ***
 const strikeLine=document.createElement('input');
 strikeLine.setAttribute('type', 'checkbox');
 strikeLine.setAttribute('id', 'checkboxLine')
@@ -72,24 +82,16 @@ li.appendChild(strikeLine);
   del.appendChild(document.createTextNode('X'));
   li.appendChild(del);
 
-//*** Removing lis and buttons from Array ***
-  del.addEventListener('click',function(){
+//*** Removing lis, delete buttons, amd strikethrough lines ***
+  del.addEventListener('click',function(e){
     const liDel=document.getElementById('items');
     liDel.removeChild(li);
-    const removeDelBtn=document.getElementById('items');
-    removeDelBtn.removeChild(del);
-    const removeStrikeBtn=document.getElementById('items');
-    removeStrikeBtn.removeChild(strikeLine);
-    localStorage.removeItem('list');
+    // const removeDelBtn=document.getElementById('items');
+    // removeDelBtn.removeChild(del);
+    // const removeStrikeBtn=document.getElementById('items');
+    // removeStrikeBtn.removeChild(strikeLine);
+    // localStorage.removeItem('list');
   })
 
   document.getElementById('items').appendChild(li);
-  // document.getElementById('items').appendChild(del);
-  // document.getElementById('items').appendChild(strikeLine)
 }
-
-
-//*** Remvoing lis from website works succesfully but:
-  //*** 1. All variables are removed from Array when the delete button is clicked
-  //*** 2. Reloading the page shows the delete button and the checkbox but not the li for only 1 item
-  //*** 3. To-Dos fail to crossed out when the checkbox is clicked
