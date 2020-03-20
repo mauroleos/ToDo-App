@@ -17,7 +17,7 @@ function addItem(e){
   strikeLine.setAttribute('type', 'checkbox');
   strikeLine.setAttribute('class', 'checkboxLine')
   strikeLine.addEventListener('click',function(e){
-    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.remove('strikeLine');
+    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
   });
   li.appendChild(strikeLine);
   //*** Adding delete button to Lis ***
@@ -28,13 +28,13 @@ function addItem(e){
   del.addEventListener('click',function(e){
     const liDel=document.getElementById('items');
     const deletedItemsArray=JSON.parse(localStorage.getItem('list')) || itemsArray;
-    console.log(deletedItemsArray)
-    const indexItem=deletedItemsArray.indexOf(e.target.parentElement);
-    // const indexItem=deletedItemsArray.indexOf(newItem);
+    // console.log(deletedItemsArray)
+    const indexItem=deletedItemsArray.indexOf(e.target.parentElement); // or index of li?
     console.log(indexItem)
-    localStorage.setItem('list', JSON.stringify(deletedItemsArray));
+    // localStorage.setItem('list', JSON.stringify(deletedItemsArray));
     liDel.removeChild(li);
     console.log(e)
+    console.log(e.target.parentElement)
   })
   document.getElementById('items').appendChild(li);
   //*** Pushing items to localStorage ***
@@ -56,7 +56,7 @@ for (let i=0; i<savedItems.length; i++){
   strikeLine.setAttribute('type', 'checkbox');
   strikeLine.setAttribute('class', 'checkboxLine')
   strikeLine.addEventListener('click',function(e){
-    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.remove('strikeLine');
+    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
   });
   li.appendChild(strikeLine);
   //*** Adding delete button to Lis ***
