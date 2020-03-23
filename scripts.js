@@ -9,6 +9,7 @@ function addItem(e){
   const newItem=document.getElementById('item').value;
   const li=document.createElement('li');
   const itemId = list.length ? list.length : 0
+  // console.log(itemId)
   li.setAttribute('id', itemId);
   const textNode=document.createTextNode(newItem);
   li.appendChild(textNode);
@@ -28,18 +29,26 @@ function addItem(e){
   del.addEventListener('click',function(e){
     const liDel=document.getElementById('items');
     const deletedItemsArray=JSON.parse(localStorage.getItem('list')) || itemsArray;
-    // console.log(deletedItemsArray)
-    const indexItem=deletedItemsArray.indexOf(e.target.parentElement); // or index of li?
-    console.log(indexItem)
-    // localStorage.setItem('list', JSON.stringify(deletedItemsArray));
+    console.log(deletedItemsArray)
+    const indexItem=deletedItemsArray.indexOf(e.target.parentElement);
+    // console.log(e)
+    // console.log(e.target.parentElement)
     liDel.removeChild(li);
-    console.log(e)
-    console.log(e.target.parentElement)
   })
   document.getElementById('items').appendChild(li);
   //*** Pushing items to localStorage ***
-  itemsArray.push(newItem);
-  localStorage.setItem('list', JSON.stringify(itemsArray));
+  list.push(newItem);
+  localStorage.setItem('list', JSON.stringify(list));
+}
+
+function deleteTask(id){
+  for(let i=0; i<deletedItemsArray.length; i++){
+    if(deletedItemsArray[i].id == itemId){
+      list.splice(i,1);
+    }
+    localStorage.setItem('list', JSON.stringify(list));
+    console.log(list);
+  }
 }
 
 let displayArrayItems = [];
