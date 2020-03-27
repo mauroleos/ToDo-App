@@ -4,5 +4,5 @@ This is my second application where I learned to how to leverage local storage t
 
 click <a href="https://mauroleos.github.io/ToDo-app/">here</a> to see website.
 
-<img src="image/todo-list.jpg" alt="image">
+<img src="image/todo-list.jpg.png" alt="image">
 
