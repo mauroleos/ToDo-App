@@ -1,72 +1,74 @@
 const form=document.getElementById('list-container');
 form.addEventListener('submit', addItem);
-let itemsArray =[];
-const list=JSON.parse(localStorage.getItem('list')) || itemsArray;
 
-//*** Adding lis ***
 function addItem(e){
   e.preventDefault();
-  const newItem=document.getElementById('item').value;
-  const li=document.createElement('li');
-  const itemId = list.length ? list.length : 0
-  li.setAttribute('id', itemId);
-  const textNode=document.createTextNode(newItem);
-  li.appendChild(textNode);
+  const newItem = document.getElementById('item').value;
+  const li = createLiElement(newItem);
 
-  const strikeLine=document.createElement('input');
-  strikeLine.setAttribute('type', 'checkbox');
-  strikeLine.setAttribute('class', 'checkBoxLine')
-  strikeLine.addEventListener('click',function(e){
-    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
-  });
-  li.appendChild(strikeLine);
+  const checkbox = createCheckbox();
+  li.append(checkbox);
 
-  const del=document.createElement('button');
-  del.setAttribute('class', 'deleteButton');
-  del.appendChild(document.createTextNode('X'));
+  const del = createDeleteButton(newItem, li);
   li.appendChild(del);
 
-  del.addEventListener('click',function(e){
-    const liDel=document.getElementById('items');
-    const indexItem=list.indexOf(newItem);
-    list.splice(indexItem, 1)
-    localStorage.setItem('list',JSON.stringify(list))
-    liDel.removeChild(li);
-  })
-
   document.getElementById('items').appendChild(li);
+  const list = JSON.parse(localStorage.getItem('list')) || [];
   list.push(newItem);
   localStorage.setItem('list', JSON.stringify(list));
 }
 
-let displayArrayItems = [];
-const savedItems = JSON.parse(localStorage.getItem('list')) || displayArrayItems;
-for (let i=0; i<savedItems.length; i++){
-  const displayItems = savedItems[i]
-  const newItem=displayItems
-  const li=document.createElement('li');
-  const textNode=document.createTextNode(newItem);
-  li.appendChild(textNode);
+const savedItems = JSON.parse(localStorage.getItem('list')) || [];
 
-  const strikeLine=document.createElement('input');
-  strikeLine.setAttribute('type', 'checkbox');
-  strikeLine.setAttribute('class', 'checkBoxLine')
-  strikeLine.addEventListener('click',function(e){
-    strikeLine.checked? e.target.parentElement.classList.add('strikeLine'): e.target.parentElement.classList.remove('strikeLine');
-  });
+for (let i = 0; i < savedItems.length; i++){
+  const li = createLiElement(savedItems[i]);
+
+  const strikeLine = createCheckbox();
   li.appendChild(strikeLine);
 
-  const del=document.createElement('button');
-  del.setAttribute('class', 'deleteButton');
-  del.appendChild(document.createTextNode('X'));
+  const del = createDeleteButton(savedItems[i], li);
   li.appendChild(del);
 
+  document.getElementById('items').appendChild(li);
+}
+
+function createLiElement(todoItemText){
+  const li = document.createElement('li');
+  const list = JSON.parse(localStorage.getItem('list')) || [];
+  const itemId = list.length ? list.length : 0;
+  li.setAttribute('id', itemId);
+  const textNode=document.createTextNode(todoItemText);
+  li.appendChild(textNode);
+
+  return li;
+}
+
+function createCheckbox(){
+  const checkbox = document.createElement('input');
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.setAttribute('class', 'checkBoxLine')
+  checkbox.addEventListener('click',function(e){
+    checkbox.checked ?
+    e.target.parentElement.classList.add('strikeLine')
+    : e.target.parentElement.classList.remove('strikeLine');
+  });
+
+  return checkbox;
+}
+
+function createDeleteButton(todoItemText, liElement){
+  const del = document.createElement('button');
+  del.setAttribute('class', 'deleteButton');
+  del.appendChild(document.createTextNode('X'));
+
   del.addEventListener('click',function(e){
-    const liDel=document.getElementById('items');
-    const indexItem=list.indexOf(newItem);
+    const liDel = document.getElementById('items');
+    const list = JSON.parse(localStorage.getItem('list')) || [];
+    const indexItem = list.indexOf(todoItemText);
     list.splice(indexItem, 1)
     localStorage.setItem('list',JSON.stringify(list))
-    liDel.removeChild(li);
-  })
-  document.getElementById('items').appendChild(li);
+    liDel.removeChild(liElement);
+  });
+
+  return del;
 }

@@ -1,23 +1,23 @@
 body{
-justify-content: center;
-background-image: url("image/sky-unsplash.jpg");
-margin-bottom: 50px;
-margin-top: 50px;
-font-family: 'Courier New', monospace;
-margin: 0;
-text-align: center;
-font-size: 35px;
-color: Black;
-flex-direction: column;
-margin: auto;
-}
+	justify-content: center;
+	background-image: url("image/sky-unsplash.jpg");
+	margin-bottom: 50px;
+	margin-top: 50px;
+	font-family: 'Courier New', monospace;
+	margin: 0;
+	text-align: center;
+	font-size: 35px;
+	color: Black;
+	flex-direction: column;
+	margin: auto;
+	}
 
-.strikeLine {
+.strikeLine{
 	text-decoration: line-through;
 	color: red;
 }
 
-#submitBtn{
+#submit-btn{
   background: #223641;
   border-radius: 10px;
   color: white;
@@ -37,24 +37,24 @@ margin: auto;
 	border: 1px solid #8d9696;
 }
 
-ul {
+ul{
 	display: flex;
 	flex-direction: column;
 	list-style: none;
 	margin-top: 30px;
 }
 
-h2 {
+h2{
 	margin-top: 100px;
 }
 
-#items {
+#items{
 	display: flex;
 	text-align: center;
 	font-family: 'Roboto Mono', monospace;
 }
 
-.checkBoxLine {
+.checkBoxLine{
 	-webkit-appearance: none;
 	background-color: #f2f3f3;
 	border: 1px solid #8d9696;
@@ -75,7 +75,7 @@ h2 {
   font: bold 15px arial, sans-serif;
 }
 
-.checkBoxLine:checked {
+.checkBoxLine:checked{
   border: 1px solid SteelBlue;
 }
 .checkBoxLine:checked:after{
